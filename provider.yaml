@@ -6,7 +6,7 @@ spec:
   terraform:
     nodeTemplate:
       git:
-        repository: https://github.com/FabianKramm/vcluster-tf-example-pod.git
+        repository: https://github.com/loft-demos/vcluster-auto-nodes-pod.git
         subPath: node
     nodeTypes:
     - name: medium
