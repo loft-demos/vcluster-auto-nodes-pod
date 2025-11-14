@@ -43,7 +43,7 @@ resource "kubernetes_pod_v1" "pod_node" {
 
     container {
       name  = "pod-node"
-      image = "ghcr.io/fabiankramm/pod-node"
+      image = "ghcr.io/fabiankramm/pod-node:latest"
 
       security_context {
         privileged = true
