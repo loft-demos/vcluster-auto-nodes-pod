@@ -16,17 +16,16 @@ locals {
   test_prop          = try(var.vcluster.nodeClaim.spec.properties["test"], null)
   kubernetes_version = try(var.vcluster.kubeVersion, "v1.33.0")
 
-pre_pull_items = <<-EOT
+  pre_pull_items = <<-EOT
 - ctr -n k8s.io images pull registry.k8s.io/pause:3.10
 - ctr -n k8s.io images pull registry.k8s.io/kube-proxy:${local.kubernetes_version}
 EOT
 
-user_data_with_prepull = length(split("runcmd:\n", var.vcluster.userData)) > 1 ? replace(
-  var.vcluster.userData,
-  "runcmd:\n",
-  "runcmd:\n${local.pre_pull_items}"
-) : "${trimspace(var.vcluster.userData)}\nruncmd:\n${local.pre_pull_items}"
-
+  user_data_with_prepull = length(split("runcmd:\n", var.vcluster.userData)) > 1 ? replace(
+    var.vcluster.userData,
+    "runcmd:\n",
+    "runcmd:\n${local.pre_pull_items}"
+  ) : "${trimspace(var.vcluster.userData)}\nruncmd:\n${local.pre_pull_items}"
 
   common_labels = merge(
     {
