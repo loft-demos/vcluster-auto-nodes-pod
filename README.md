@@ -2,6 +2,8 @@
 
 Terraform modules for the [vCluster Platform Auto Nodes](https://www.vcluster.com/docs/vcluster/deploy/worker-nodes/private-nodes/auto-nodes/) feature using [pod-node](https://github.com/loft-demos/pod-node) container images as in-cluster worker nodes.
 
+> **Note:** This approach requires a **container-based Kubernetes cluster** (e.g. [vind](https://github.com/loft-demos/vcluster-platform-demo-app-template/tree/main/vind-demo-cluster), [kind](https://kind.sigs.k8s.io/)). Pod-nodes use privileged containers with nested container runtimes (containerd + kubelet inside a pod). This does **not** work on standard VM-based clusters (EKS, GKE, AKS, bare-metal) where the host kernel does not support the required nesting.
+
 ## Structure
 
 ```text
